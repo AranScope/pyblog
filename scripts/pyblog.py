@@ -3,6 +3,7 @@ import time
 import glob
 import markdown
 
+template_url = "../templates"
 post_template_url = "../templates/post.html"
 contents_template_url = "../templates/contents.html"
 
@@ -16,7 +17,7 @@ def markdown_to_html(markdown_file_url, post_directory_url):
     print "Converting markdown file: " + os.path.basename(markdown_file_url) + " to html..."
 
     with open(markdown_file_url) as markdown_file:
-        markdown_test = markdown_file.read()
+        markdown_text = markdown_file.read()
 
 	html = markdown.markdown(markdown_text)
 
@@ -25,7 +26,7 @@ def markdown_to_html(markdown_file_url, post_directory_url):
 	with open(post_template_url) as post_template_html_file:
 		new_post_html = post_template_html_file.read()
 
-	new_post_html = new_post_html.replace("pyblog-title", os.path.basename(markdown_file_url))
+	new_post_html = new_post_html.replace("pyblog-title", os.path.basename(markdown_file_url).replace(".md", ""))
 	new_post_html = new_post_html.replace("pyblog-body", html)
 
 	with open(new_post_url, 'w') as new_post_html_file:
@@ -61,6 +62,7 @@ def update_loop():
 
 	while True:
 		markdown_file_urls = glob.glob(posts_markdown_url + "/*.md")
+		template_file_urls = glob.glob(template_url + "/*")
 
 		for markdown_file_url in markdown_file_urls:
 			last_modified_time = os.stat(markdown_file_url).st_mtime
@@ -70,7 +72,14 @@ def update_loop():
 				markdown_to_html(markdown_file_url, posts_html_url)
 				generate_contents(posts_html_url)
 
-			time.sleep(5)
+		for template_file_url in template_file_urls:
+			last_modified_time = os.stat(template_file_url).st_mtime
+
+			if time.time() - last_modified_time < 5:
+				print "Template: " + template_file_url + " updated"
+				update_all()
+
+		time.sleep(5)
 
 
 def update_all():

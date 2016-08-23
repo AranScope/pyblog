@@ -1,7 +1,7 @@
-import os, time
-from time import sleep
-from glob import glob
-from markdown import markdown
+import os
+import time
+import glob
+import markdown
 
 post_template_url = "../templates/post.html"
 contents_template_url = "../templates/contents.html"
@@ -18,7 +18,7 @@ def markdown_to_html(markdown_file_url, post_directory_url):
     with open(markdown_file_url) as markdown_file:
         markdown_test = markdown_file.read()
 
-	html = markdown(markdown_text)
+	html = markdown.markdown(markdown_text)
 
 	new_post_url = posts_html_url + "/" + os.path.basename(markdown_file_url).replace(".md", ".html")
 
@@ -42,7 +42,7 @@ def generate_contents(post_directory_url):
 	with open(contents_template_url) as contents_template_file:
 		new_contents_html = contents_template_file.read()
 
-	post_urls = glob(posts_html_url + "/*.html")
+	post_urls = glob.glob(posts_html_url + "/*.html")
 
 	contents_html_body = ""
 
@@ -60,7 +60,7 @@ def update_loop():
 	"""
 
 	while True:
-		markdown_file_urls = glob(posts_markdown_url + "/*.md")
+		markdown_file_urls = glob.glob(posts_markdown_url + "/*.md")
 
 		for markdown_file_url in markdown_file_urls:
 			last_modified_time = os.stat(markdown_file_url).st_mtime
@@ -70,7 +70,7 @@ def update_loop():
 				markdown_to_html(markdown_file_url, posts_html_url)
 				generate_contents(posts_html_url)
 
-			sleep(5)
+			time.sleep(5)
 
 
 def update_all():
@@ -78,7 +78,7 @@ def update_all():
 	"""
 
 	print "Updating all posts..."
-	post_urls = glob(posts_markdown_url + "/*.md")
+	post_urls = glob.glob(posts_markdown_url + "/*.md")
 
 	for post_url in post_urls:
 		markdown_to_html(post_url, posts_html_url)

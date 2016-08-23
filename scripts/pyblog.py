@@ -3,11 +3,11 @@ import time
 import glob
 import markdown
 
-template_url = "../templates"
-post_template_url = "../templates/post.html"
-contents_template_url = "../templates/contents.html"
+template_url = "../web/templates"
+post_template_url = "../web/templates/post.html"
+contents_template_url = "../web/templates/contents.html"
 
-posts_html_url = "../html"
+posts_html_url = "../web"
 posts_markdown_url = "../markdown"
 
 def markdown_to_html(markdown_file_url, post_directory_url):

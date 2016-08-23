@@ -4,3 +4,6 @@
 *.jpg
 *.gif
 *.md
+
+# Not the gitignore
+!.gitignore

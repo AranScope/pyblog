@@ -19,3 +19,6 @@ A super simple markdown-html blog generator.
 3. You can modify these as much as you wish but be aware, the keywords 'pyblog-title' and 'pyblog-body' are used to inject html
 
 ### Using with github.io
+1. Clone your 'username'.github.io repository
+2. Copy all of the files in the pyblog/web/ directory into the root directory of your github.io repo
+3. (Optional) Setup for eg. Cron to automatically complete this task and push to github

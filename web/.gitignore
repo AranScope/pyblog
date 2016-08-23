@@ -1,0 +1,6 @@
+# Ignore all web files at this level 
+*.html
+*.png
+*.jpg
+*.gif
+*.md

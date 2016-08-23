@@ -2,6 +2,9 @@
 A super simple markdown-html blog generator.
 
 ## Usage
+### General
+When posts or templates are modified, the website will be automatically regenerated, as long as the script is running.
+
 ### Installing and running pyblog
 1. Make sure you have the google drive desktop sync software installed and running.
 2. Navigate into a synched google drive folder and run 'git clone https://github.com/aranscope/pyblog.git'
